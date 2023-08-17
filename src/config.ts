@@ -5,45 +5,25 @@ dotenv.config();
 // Note these variables can possibly be undefined
 // as someone could skip these varibales or not setup a .env file at all
 interface ENV {
-  SMTP_HOST: string | undefined;
-  SMTP_PORT: number | undefined;
-  SMTP_SECURE: boolean | undefined;
-  SMTP_USERNAME: string | undefined;
-  SMTP_PASSWORD: string | undefined;
   REDIS_HOST: string | undefined;
   REDIS_PORT: number | undefined;
   REDIS_USERNAME: string | undefined;
   REDIS_PASSWORD: string | undefined;
   REDIS_DB: number | undefined;
+  BADGR_URL: string | undefined;
+  BADGR_ISSUER_ID: string | undefined;
+  BADGR_USERNAME: string | undefined;
+  BADGR_PASSWORD: string | undefined;
+  BADGR_CLIENT_ID: string | undefined;
+  BADGR_CLIENT_SECRET: string | undefined;
   BULLMQ_QUEUE_NAME: string | undefined;
 }
 
-interface Config {
-  SMTP_HOST: string | undefined;
-  SMTP_PORT: number | undefined;
-  SMTP_SECURE: boolean | undefined;
-  SMTP_USERNAME: string | undefined;
-  SMTP_PASSWORD: string | undefined;
-  REDIS_HOST: string | undefined;
-  REDIS_PORT: number | undefined;
-  REDIS_USERNAME: string | undefined;
-  REDIS_PASSWORD: string | undefined;
-  REDIS_DB: number | undefined;
-  BULLMQ_QUEUE_NAME: string | undefined;
-}
+interface Config extends ENV {}
 
 // Loading process.env as ENV interface
 const getConfig = (): ENV => {
   return {
-    SMTP_HOST: process.env.SMTP_HOST,
-    SMTP_PORT: process.env.SMTP_PORT
-      ? Number(process.env.SMTP_PORT)
-      : undefined,
-    SMTP_SECURE: process.env.SMTP_SECURE
-      ? Boolean(JSON.parse(process.env.SMTP_SECURE))
-      : undefined,
-    SMTP_USERNAME: process.env.SMTP_USERNAME,
-    SMTP_PASSWORD: process.env.SMTP_PASSWORD,
     REDIS_HOST: process.env.REDIS_HOST,
     REDIS_PORT: process.env.REDIS_PORT
       ? Number(process.env.REDIS_PORT)
@@ -51,6 +31,12 @@ const getConfig = (): ENV => {
     REDIS_USERNAME: process.env.REDIS_USERNAME,
     REDIS_PASSWORD: process.env.REDIS_PASSWORD,
     REDIS_DB: process.env.REDIS_DB ? Number(process.env.REDIS_DB) : undefined,
+    BADGR_URL: process.env.BADGR_URL,
+    BADGR_ISSUER_ID: process.env.BADGR_ISSUER_ID,
+    BADGR_USERNAME: process.env.BADGR_USERNAME,
+    BADGR_PASSWORD: process.env.BADGR_PASSWORD,
+    BADGR_CLIENT_ID: process.env.BADGR_CLIENT_ID,
+    BADGR_CLIENT_SECRET: process.env.BADGR_CLIENT_SECRET,
     BULLMQ_QUEUE_NAME: process.env.BULLMQ_QUEUE_NAME,
   };
 };

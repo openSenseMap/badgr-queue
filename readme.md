@@ -34,7 +34,7 @@ Open [localhost:8001](http://localhost:8001) with your browser and connect to Re
 
 Templates are located within this repository under the `emails` folder. We use [react email](https://react.email/) to create our email templates. Please read the [react email docs](https://react.email/docs/introduction) before adding new templates.
 
-What´s really cool about *react email* is you get a live preview for the templates and you don´t need to keep sending real emails during development.
+What´s really cool about _react email_ is you get a live preview for the templates and you don´t need to keep sending real emails during development.
 
 To start the live preview run:
 
