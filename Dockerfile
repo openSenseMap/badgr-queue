@@ -10,7 +10,7 @@ FROM node:18-bullseye-slim as base
 # Install all noe_modules, including dev dependencies
 FROM base as deps
 
-WORKDIR /myapp
+WORKDIR /app
 
 ADD package.json yarn.lock ./
 RUN yarn install
@@ -18,30 +18,29 @@ RUN yarn install
 # Build the app
 FROM base as build
 
-WORKDIR /myapp
+WORKDIR /app
 
-COPY --from=deps /myapp/node_modules /myapp/node_modules
+COPY --from=deps /app/node_modules /app/node_modules
 ADD . .
 RUN yarn build
 
 # Setup production node_modules
 FROM base as production-deps
 
-WORKDIR /myapp
+WORKDIR /app
 
-COPY --from=deps /myapp/node_modules /myapp/node_modules
+COPY --from=deps /app/node_modules /app/node_modules
 ADD package.json yarn.lock ./
 RUN yarn install --production
 
 # Finally, build the production image with minimal footprint
 FROM base
 
-WORKDIR /myapp
+WORKDIR /app
 
-COPY --from=production-deps /myapp/node_modules /myapp/node_modules
-COPY --from=build /myapp/emails /myapp/emails
+COPY --from=production-deps /app/node_modules /app/node_modules
 
-COPY --from=build /myapp/dist /myapp/dist
+COPY --from=build /app/dist /app/dist
 ADD . .
 
 CMD ["node", "dist/index.js"]
