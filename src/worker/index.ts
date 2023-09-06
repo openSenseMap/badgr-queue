@@ -2,6 +2,7 @@ import type { Job } from "bullmq";
 import { BadgrClient } from "../badgr/client";
 
 import config from "../config";
+import logger from "../logger";
 
 export interface Payload {
   badgeClassEntityId: string;
@@ -17,6 +18,8 @@ export default async function (job: Job) {
     email,
     issuerEntityId,
   }: Payload = job.data;
+
+  logger.info({ badgeClassEntityId, email, issuerEntityId, createNotification }, "Job payload")
 
   const client = new BadgrClient({
     endpoint: config.BADGR_URL,

@@ -4,7 +4,7 @@ import { Worker } from "bullmq";
 import config from "./config";
 
 // Import logger
-// import logger from "./logger";
+import logger from "./logger";
 
 // Bullmq worker
 import badgrWorker from "./worker";
@@ -29,30 +29,30 @@ async function main() {
     worker = createWorker();
 
     worker.on("error", (err) => {
-      // logger.error(err);
+      logger.error(err);
     });
 
     // Start worker
     worker.run();
   } catch (error) {
-    // logger.error(error);
+    logger.error(error);
   }
 }
 
 process.on("uncaughtException", function (err) {
   // Handle the error safely
-  // logger.error(err, "Uncaught exception");
+  logger.error(err, "Uncaught exception");
 });
 
 process.on("unhandledRejection", (reason, promise) => {
   // Handle the error safely
-  // logger.error({ promise, reason }, "Unhandled Rejection at: Promise");
+  logger.error({ promise, reason }, "Unhandled Rejection at: Promise");
 });
 
 process.on("SIGINT", async () => {
-  // logger.info("Going to close worker connection...");
+  logger.info("Going to close worker connection...");
   await worker.close();
-  // logger.info("Worker was closed!");
+  logger.info("Worker was closed!");
 });
 
 // 🔥 Fire it up!
