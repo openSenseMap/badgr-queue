@@ -13,6 +13,7 @@ export interface Route {
   name: string;
   method: string; // should be changed to enum
   spec: Spec;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   chain: any;
 }
 
@@ -21,7 +22,7 @@ export interface Payload {
   route: Route;
 }
 
-export default async function (job: Job) {
+export default async function worker(job: Job) {
   try {
     const { email, route }: Payload = job.data;
     const createNotification = true;

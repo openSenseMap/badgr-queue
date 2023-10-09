@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
 
-import { cleanEnv, str, json, num, url, makeValidator } from "envalid";
+import { cleanEnv, str, num, url, makeValidator } from "envalid";
 
 const badgeMappingValidator = makeValidator((value) => {
   try {
