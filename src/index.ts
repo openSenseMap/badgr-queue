@@ -26,6 +26,7 @@ export function createWorker() {
 
 async function main() {
   try {
+    console.log(config.BADGE_MAPPINGS);
     worker = createWorker();
 
     worker.on("error", (err) => {

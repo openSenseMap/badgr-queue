@@ -4,23 +4,29 @@ import { BadgrClient } from "../badgr/client";
 import config from "../config";
 import logger from "../logger";
 
+export interface Spec {
+  path: string;
+  method: string; // should be changed to enum
+}
+
+export interface Route {
+  name: string;
+  method: string; // should be changed to enum
+  spec: Spec;
+  chain: any;
+}
+
 export interface Payload {
-  badgeClassEntityId: string;
   email: string;
-  issuerEntityId: string;
-  createNotification: boolean;
+  route: Route;
 }
 
 export default async function (job: Job) {
   try {
-    const {
-      badgeClassEntityId,
-      createNotification,
-      email,
-      issuerEntityId,
-    }: Payload = job.data;
+    const { email, route }: Payload = job.data;
+    const createNotification = true;
 
-    logger.info({ badgeClassEntityId, email, issuerEntityId, createNotification }, "Job payload")
+    logger.info({ email, route }, "Job payload");
 
     const client = new BadgrClient({
       endpoint: config.BADGR_URL,
@@ -31,10 +37,14 @@ export default async function (job: Job) {
       client_secret: config.BADGR_CLIENT_SECRET,
     });
 
+    if (!config.BADGE_MAPPINGS.get(route.name)) {
+      throw new Error(`No BadgeClassEntityId found for route ${route.name}`);
+    }
+
     return await client.grant({
-      badgeClassEntityId,
+      badgeClassEntityId: config.BADGE_MAPPINGS.get(route.name) || "",
       email,
-      issuerEntityId,
+      issuerEntityId: config.BADGR_ISSUER_ID,
       createNotification,
     });
   } catch (error) {

@@ -19,6 +19,7 @@
   "dependencies": {
     "bullmq": "^4.7.2",
     "dotenv": "^16.3.1",
+    "envalid": "^8.0.0",
     "pino": "^8.15.0"
   },
   "devDependencies": {
