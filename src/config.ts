@@ -17,20 +17,29 @@ const badgeMappingValidator = makeValidator((value) => {
   }
 });
 
-const config = cleanEnv(process.env, {
-  REDIS_HOST: str(),
-  REDIS_PORT: num(),
-  REDIS_USERNAME: str(),
-  REDIS_PASSWORD: str(),
-  REDIS_DB: num(),
-  BADGR_URL: url(),
-  BADGR_ISSUER_ID: str(),
-  BADGR_USERNAME: str(),
-  BADGR_PASSWORD: str(),
-  BADGR_CLIENT_ID: str(),
-  BADGR_CLIENT_SECRET: str(),
-  BULLMQ_QUEUE_NAME: str(),
-  BADGE_MAPPINGS: badgeMappingValidator(),
-});
+const config = cleanEnv(
+  process.env,
+  {
+    REDIS_HOST: str(),
+    REDIS_PORT: num(),
+    REDIS_USERNAME: str(),
+    REDIS_PASSWORD: str(),
+    REDIS_DB: num(),
+    BADGR_URL: url(),
+    BADGR_ISSUER_ID: str(),
+    BADGR_USERNAME: str(),
+    BADGR_PASSWORD: str(),
+    BADGR_CLIENT_ID: str(),
+    BADGR_CLIENT_SECRET: str(),
+    BULLMQ_QUEUE_NAME: str(),
+    BADGE_MAPPINGS: badgeMappingValidator(),
+  },
+  {
+    reporter:
+      process.env.NODE_ENV === "test"
+        ? ({ errors }) => Object.keys(errors).length && console.error(errors)
+        : undefined,
+  },
+);
 
 export default config;
