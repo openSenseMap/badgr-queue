@@ -30,3 +30,22 @@ jobs:
 
       - name: 🔬 Run tests
         run: npm run test
+        env:
+          REDIS_HOST: ${{ vars.REDIS_HOST }}
+          REDIS_PORT: ${{ vars.REDIS_PORT }}
+          REDIS_USERNAME: ${{ secrets.REDIS_USERNAME }}
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD}}
+          REDIS_DB: ${{ vars.BULLMQ_QUEUE_NAME }}
+          BULLMQ_QUEUE_NAME: ${{ vars.BADGR_URL }}
+          BADGR_URL: ${{ vars.BADGR_URL }}
+          BADGR_ISSUER_ID: ${{ secrets.BADGR_ISSUER_ID }}
+          BADGR_USERNAME: ${{ secrets.BADGR_USERNAME }}
+          BADGR_PASSWORD: ${{ secrets.BADGR_PASSWORD}}
+          BADGR_CLIENT_ID: ${{ secrets.BADGR_CLIENT_ID}}
+          BADGR_CLIENT_SECRET: ${{secrets.BADGR_CLIENT_SECRET }}
+          BADGE_MAPPINGS: ${{ secrets.BADGE_MAPPINGS }}
+          MAILSLURP_API_KEY: ${{ secrets.MAILSLURP_API_KEY }}
+          MAILSLURP_INBOX_ID: ${{ secrets.MAILSLURP_INBOX_ID }}
+          MAILSLURP_INBOX_EMAIL_ADDRESS: ${{ secrets.MAILSLURP_INBOX_EMAIL_ADDRESS }}
+          BADGE_CLASS_ENTITY_ID: ${{ secrets.BADGE_CLASS_ENTITY_ID }}
+          ISSUER_ENTITY_ID: ${{ secrets.ISSUER_ENTITY_ID }}
