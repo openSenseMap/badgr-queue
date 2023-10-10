@@ -15,7 +15,7 @@
     "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
     "clean": "rm -rf dist",
     "test": "jest --setupFiles dotenv/config",
-    "lint": "eslint --config ./eslint.config.cjs --cache --cache-location ./node_modules/.cache/eslint ."
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ."
   },
   "dependencies": {
     "bullmq": "^4.7.2",
