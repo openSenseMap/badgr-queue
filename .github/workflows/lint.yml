@@ -26,9 +26,4 @@ jobs:
         run: npm install
 
       - name: 🔬 Run linters
-        # run: npm run lint
-        uses: wearerequired/lint-action@v2
-        with:
-          # Enable linters
-          eslint: true
-          prettier: true
+        run: npm run lint
