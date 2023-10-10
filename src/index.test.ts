@@ -36,8 +36,8 @@ describe("Worker", () => {
     });
   });
 
-  afterAll(() => {
-    worker?.close();
+  afterAll(async () => {
+    await worker?.close();
   });
 
   test("should be able to create a worker", () => {
