@@ -19,10 +19,11 @@ describe("Worker", () => {
   let mailslurp: MailSlurp;
 
   beforeAll(async () => {
+    const inboxId = process.env.MAILSLURP_INBOX_ID || "";
     mailslurp = new MailSlurp({
       apiKey: process.env.MAILSLURP_API_KEY || "",
     });
-    inbox = await mailslurp.inboxController.createInboxWithDefaults();
+    inbox = await mailslurp.getInbox(inboxId);
 
     queue = new Queue(config.BULLMQ_QUEUE_NAME || "badgr-queue", {
       connection: {
