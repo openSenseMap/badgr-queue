@@ -36,7 +36,7 @@ jobs:
           REDIS_USERNAME: ${{ secrets.REDIS_USERNAME }}
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD}}
           REDIS_DB: ${{ vars.BULLMQ_QUEUE_NAME }}
-          BULLMQ_QUEUE_NAME: ${{ vars.BADGR_URL }}
+          BULLMQ_QUEUE_NAME: ${{ vars.BULLMQ_QUEUE_NAME }}
           BADGR_URL: ${{ vars.BADGR_URL }}
           BADGR_ISSUER_ID: ${{ secrets.BADGR_ISSUER_ID }}
           BADGR_USERNAME: ${{ secrets.BADGR_USERNAME }}
