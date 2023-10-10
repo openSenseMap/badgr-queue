@@ -12,6 +12,7 @@ export interface Spec {
 export interface Route {
   name: string;
   method: string; // should be changed to enum
+  path: string;
   spec: Spec;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   chain: any;

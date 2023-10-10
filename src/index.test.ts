@@ -47,10 +47,18 @@ describe("Worker", () => {
 
   test("should be able to create a job", async () => {
     const payload: Payload = {
-      badgeClassEntityId: process.env.BADGE_CLASS_ENTITY_ID || "",
       email: inbox.emailAddress,
-      issuerEntityId: process.env.ISSUER_ENTITY_ID || "",
-      createNotification: true,
+      route: {
+        name: "getusersme",
+        method: "GET",
+        path: "/users/me",
+        spec: { path: "/users/me", method: "GET" },
+        chain: {
+          onceNext: true,
+          strictNext: false,
+          _stack: [null, null, null],
+        },
+      },
     };
     queue?.add("test", payload);
     const email = await mailslurp.waitForLatestEmail(inbox.id);
