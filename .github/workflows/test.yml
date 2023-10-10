@@ -29,26 +29,26 @@ jobs:
         run: docker compose up -d && sleep 10
 
       - name: 🏄 Copy test env vars
-        run: cp .env.example .env
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_REDIS_HOST: ${{ vars.REDIS_HOST }}
+          envkey_REDIS_PORT: ${{ vars.REDIS_PORT }}
+          envkey_REDIS_USERNAME: ${{ secrets.REDIS_USERNAME }}
+          envkey_REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD}}
+          envkey_REDIS_DB: ${{ vars.BULLMQ_QUEUE_NAME }}
+          envkey_BULLMQ_QUEUE_NAME: ${{ vars.BULLMQ_QUEUE_NAME }}
+          envkey_BADGR_URL: ${{ vars.BADGR_URL }}
+          envkey_BADGR_ISSUER_ID: ${{ secrets.BADGR_ISSUER_ID }}
+          envkey_BADGR_USERNAME: ${{ secrets.BADGR_USERNAME }}
+          envkey_BADGR_PASSWORD: ${{ secrets.BADGR_PASSWORD}}
+          envkey_BADGR_CLIENT_ID: ${{ secrets.BADGR_CLIENT_ID}}
+          envkey_BADGR_CLIENT_SECRET: ${{secrets.BADGR_CLIENT_SECRET }}
+          envkey_BADGE_MAPPINGS: ${{ secrets.BADGE_MAPPINGS }}
+          envkey_MAILSLURP_API_KEY: ${{ secrets.MAILSLURP_API_KEY }}
+          envkey_MAILSLURP_INBOX_ID: ${{ secrets.MAILSLURP_INBOX_ID }}
+          envkey_MAILSLURP_INBOX_EMAIL_ADDRESS: ${{ secrets.MAILSLURP_INBOX_EMAIL_ADDRESS }}
+          envkey_BADGE_CLASS_ENTITY_ID: ${{ secrets.BADGE_CLASS_ENTITY_ID }}
+          envkey_ISSUER_ENTITY_ID: ${{ secrets.ISSUER_ENTITY_ID }}
 
       - name: 🔬 Run tests
         run: npm run test
-        env:
-          REDIS_HOST: ${{ vars.REDIS_HOST }}
-          REDIS_PORT: ${{ vars.REDIS_PORT }}
-          REDIS_USERNAME: ${{ secrets.REDIS_USERNAME }}
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD}}
-          REDIS_DB: ${{ vars.BULLMQ_QUEUE_NAME }}
-          BULLMQ_QUEUE_NAME: ${{ vars.BULLMQ_QUEUE_NAME }}
-          BADGR_URL: ${{ vars.BADGR_URL }}
-          BADGR_ISSUER_ID: ${{ secrets.BADGR_ISSUER_ID }}
-          BADGR_USERNAME: ${{ secrets.BADGR_USERNAME }}
-          BADGR_PASSWORD: ${{ secrets.BADGR_PASSWORD}}
-          BADGR_CLIENT_ID: ${{ secrets.BADGR_CLIENT_ID}}
-          BADGR_CLIENT_SECRET: ${{secrets.BADGR_CLIENT_SECRET }}
-          BADGE_MAPPINGS: ${{ secrets.BADGE_MAPPINGS }}
-          MAILSLURP_API_KEY: ${{ secrets.MAILSLURP_API_KEY }}
-          MAILSLURP_INBOX_ID: ${{ secrets.MAILSLURP_INBOX_ID }}
-          MAILSLURP_INBOX_EMAIL_ADDRESS: ${{ secrets.MAILSLURP_INBOX_EMAIL_ADDRESS }}
-          BADGE_CLASS_ENTITY_ID: ${{ secrets.BADGE_CLASS_ENTITY_ID }}
-          ISSUER_ENTITY_ID: ${{ secrets.ISSUER_ENTITY_ID }}
