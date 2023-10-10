@@ -30,7 +30,7 @@ const config = cleanEnv(process.env, {
   BADGR_CLIENT_ID: str(),
   BADGR_CLIENT_SECRET: str(),
   BULLMQ_QUEUE_NAME: str(),
-  // BADGE_MAPPINGS: badgeMappingValidator(),
+  BADGE_MAPPINGS: badgeMappingValidator(),
 });
 
 export default config;
