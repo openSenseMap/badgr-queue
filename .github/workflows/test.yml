@@ -25,5 +25,8 @@ jobs:
       - name: 💿 Install dependencies
         run: npm install
 
+      - name: 🐳 Docker compose
+        run: docker compose up -d && sleep 10
+
       - name: 🔬 Run tests
         run: npm run test
