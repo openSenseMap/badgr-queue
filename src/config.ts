@@ -17,6 +17,8 @@ const badgeMappingValidator = makeValidator((value) => {
   }
 });
 
+// We need an own reporter for tests
+// https://github.com/af/envalid/issues/210
 const config = cleanEnv(
   process.env,
   {

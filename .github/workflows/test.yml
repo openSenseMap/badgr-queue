@@ -35,7 +35,7 @@ jobs:
           envkey_REDIS_PORT: ${{ vars.REDIS_PORT }}
           envkey_REDIS_USERNAME: ${{ secrets.REDIS_USERNAME }}
           envkey_REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD}}
-          envkey_REDIS_DB: ${{ vars.BULLMQ_QUEUE_NAME }}
+          envkey_REDIS_DB: ${{ vars.REDIS_DB }}
           envkey_BULLMQ_QUEUE_NAME: ${{ vars.BULLMQ_QUEUE_NAME }}
           envkey_BADGR_URL: ${{ vars.BADGR_URL }}
           envkey_BADGR_ISSUER_ID: ${{ secrets.BADGR_ISSUER_ID }}
