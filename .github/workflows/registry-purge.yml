@@ -1,4 +1,4 @@
-name: Purge untagged images
+name: 🗑️ Purge untagged images
 
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#registry_package
 # Run cleanup job if a new package was published or updated

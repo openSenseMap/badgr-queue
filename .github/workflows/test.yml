@@ -51,6 +51,4 @@ jobs:
           envkey_ISSUER_ENTITY_ID: ${{ secrets.ISSUER_ENTITY_ID }}
 
       - name: 🔬 Run tests
-        run: |
-          cat .env
-          npm run test
+        run: npm run test:ci
