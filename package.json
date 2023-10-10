@@ -1,5 +1,5 @@
 {
-  "name": "emails",
+  "name": "honeybadgr",
   "version": "1.0.0",
   "private": true,
   "sideEffects": false,
@@ -30,7 +30,6 @@
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
     "eslint": "^8.47.0",
-    "eslint-config-custom": "^0.0.0",
     "eslint-config-prettier": "^9.0.0",
     "jest": "^29.6.2",
     "mailslurp": "^0.0.1-security",
