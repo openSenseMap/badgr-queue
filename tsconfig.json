@@ -1,31 +1,21 @@
 {
-    "compilerOptions": {
-        "outDir": "build",
-        "declaration": true,
-        "target": "esnext",
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "ES2015"
-        ],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "jsx": "react"
-    },
-    "include": [
-        "src"
-    ],
-    "exclude": [
-        "dist",
-        "build",
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "outDir": "build",
+    "declaration": true,
+    "target": "esnext",
+    "lib": ["DOM", "DOM.Iterable", "ES2015"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": "."
+  },
+  "include": ["src"],
+  "exclude": ["dist", "build", "node_modules"]
 }

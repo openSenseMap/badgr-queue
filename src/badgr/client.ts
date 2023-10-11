@@ -18,6 +18,7 @@ export class BadgrClient {
   admin: boolean;
   client_id: string | undefined;
   client_secret: string | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   init: any;
 
   constructor({
@@ -103,7 +104,6 @@ export class BadgrClient {
     endpoint = this.endpoint,
     badgeClassEntityId,
     createNotification = false,
-    debug = this.debug,
     email,
     evidence = [],
     issuerEntityId,

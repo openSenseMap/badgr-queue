@@ -19,10 +19,11 @@ describe("Worker", () => {
   let mailslurp: MailSlurp;
 
   beforeAll(async () => {
+    const inboxId = process.env.MAILSLURP_INBOX_ID || "";
     mailslurp = new MailSlurp({
       apiKey: process.env.MAILSLURP_API_KEY || "",
     });
-    inbox = await mailslurp.inboxController.createInboxWithDefaults();
+    inbox = await mailslurp.getInbox(inboxId);
 
     queue = new Queue(config.BULLMQ_QUEUE_NAME || "badgr-queue", {
       connection: {
@@ -35,8 +36,8 @@ describe("Worker", () => {
     });
   });
 
-  afterAll(() => {
-    worker?.close();
+  afterAll(async () => {
+    await worker?.close();
   });
 
   test("should be able to create a worker", () => {
@@ -47,10 +48,18 @@ describe("Worker", () => {
 
   test("should be able to create a job", async () => {
     const payload: Payload = {
-      badgeClassEntityId: process.env.BADGE_CLASS_ENTITY_ID || "",
       email: inbox.emailAddress,
-      issuerEntityId: process.env.ISSUER_ENTITY_ID || "",
-      createNotification: true,
+      route: {
+        name: "getusersme",
+        method: "GET",
+        path: "/users/me",
+        spec: { path: "/users/me", method: "GET" },
+        chain: {
+          onceNext: true,
+          strictNext: false,
+          _stack: [null, null, null],
+        },
+      },
     };
     queue?.add("test", payload);
     const email = await mailslurp.waitForLatestEmail(inbox.id);

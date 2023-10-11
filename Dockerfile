@@ -1,19 +1,17 @@
 # Based on best pratices provided by Snyk.io
 # https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/
 
-# base node image
-FROM node:18-bullseye-slim as base
+# --------------> The build image
+FROM node:20.8.0-bullseye-slim AS base
+RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
 
-# set for base and all layer that inherit from it
-# ENV NODE_ENV production
-
-# Install all noe_modules, including dev dependencies
+# Install all node_modules, including dev dependencies
 FROM base as deps
 
 WORKDIR /app
 
-ADD package.json yarn.lock ./
-RUN yarn install
+COPY package*.json /app
+RUN npm ci
 
 # Build the app
 FROM base as build
@@ -21,8 +19,8 @@ FROM base as build
 WORKDIR /app
 
 COPY --from=deps /app/node_modules /app/node_modules
-ADD . .
-RUN yarn build
+COPY . .
+RUN npm run build
 
 # Setup production node_modules
 FROM base as production-deps
@@ -30,17 +28,20 @@ FROM base as production-deps
 WORKDIR /app
 
 COPY --from=deps /app/node_modules /app/node_modules
-ADD package.json yarn.lock ./
-RUN yarn install --production
+ADD package*.json ./
+RUN npm prune --omit=dev
 
-# Finally, build the production image with minimal footprint
+# --------------> The production image
 FROM base
 
+ENV NODE_ENV production
+COPY --from=base /usr/bin/dumb-init /usr/bin/dumb-init
+
+USER node
+
 WORKDIR /app
+COPY --chown=node:node --from=production-deps /app/node_modules /app/node_modules
+COPY --chown=node:node --from=build /app/dist /app/dist
+COPY --chown=node:node . .
 
-COPY --from=production-deps /app/node_modules /app/node_modules
-
-COPY --from=build /app/dist /app/dist
-ADD . .
-
-CMD ["node", "dist/index.js"]
+CMD ["dumb-init", "node", "dist/index.js"]
