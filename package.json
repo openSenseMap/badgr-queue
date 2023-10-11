@@ -14,8 +14,8 @@
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
     "clean": "rm -rf dist",
-    "test": "jest --setupFiles dotenv/config",
-    "test:ci": "jest --ci",
+    "test": "jest --forceExit",
+    "test:ci": "jest --ci --forceExit",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ."
   },
   "dependencies": {
