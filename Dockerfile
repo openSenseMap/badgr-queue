@@ -2,7 +2,7 @@
 # https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/
 
 # --------------> The build image
-FROM node:20.8.0-bullseye-slim AS base
+FROM node:21.4.0-bullseye-slim AS base
 RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
 
 # Install all node_modules, including dev dependencies
