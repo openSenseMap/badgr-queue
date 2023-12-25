@@ -19,7 +19,7 @@
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ."
   },
   "dependencies": {
-    "bullmq": "^4.7.2",
+    "bullmq": "^5.0.0",
     "dotenv": "^16.3.1",
     "envalid": "^8.0.0",
     "pino": "^8.15.0"
